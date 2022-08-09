@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security;
+namespace App\Security\Admin;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +15,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LginFormAuthenticator extends AbstractLoginFormAuthenticator
+class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'main_login';
+    public const LOGIN_ROUTE = 'admin_security_login';
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
@@ -47,7 +47,7 @@ class LginFormAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-         return new RedirectResponse($this->urlGenerator->generate('main_profile_index'));
+         return new RedirectResponse($this->urlGenerator->generate('admin_security_login'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
