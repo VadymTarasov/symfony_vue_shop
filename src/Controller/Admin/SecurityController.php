@@ -12,7 +12,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/admin/login', name: 'admin_security_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-//         if ($this->getUser()) {
+//         if ($this->getUser()->getRoles() !== 'ROLE_ADMIN') {
 //             return $this->redirectToRoute('main_profile_index');
 //         }
 
