@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\EditProductFormType;
+use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,16 +27,15 @@ class ProductController extends AbstractController
 
     #[Route('/admin/product/edit{id}', name: 'admin_product_edit')]
     #[Route('/admin/product/add', name: 'admin_product_add')]
-    public function edit(Request $request, Product $product = null, ManagerRegistry $doctrine): Response
+    public function edit(Request $request, ProductFormHandler $formHandler, Product $product = null, ManagerRegistry $doctrine): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(EditProductFormType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $product = $formHandler->processEditForm($product, $form);
+
 
             return $this->redirectToRoute('admin_product_edit', ['id'=>$product->getId()]);
         }
