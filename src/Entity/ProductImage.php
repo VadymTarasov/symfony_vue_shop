@@ -24,7 +24,7 @@ class ProductImage
     private ?string $falenameMiddle = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $falenameCmall = null;
+    private ?string $falenameSmall = null;
 
     public function getId(): ?int
     {
@@ -67,14 +67,14 @@ class ProductImage
         return $this;
     }
 
-    public function getFalenameCmall(): ?string
+    public function getFalenameSmall(): ?string
     {
-        return $this->falenameCmall;
+        return $this->falenameSmall;
     }
 
-    public function setFalenameCmall(string $falenameCmall): self
+    public function setFalenameSmall(string $falenameSmall): self
     {
-        $this->falenameCmall = $falenameCmall;
+        $this->falenameSmall = $falenameSmall;
 
         return $this;
     }
