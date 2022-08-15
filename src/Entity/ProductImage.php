@@ -21,10 +21,10 @@ class ProductImage
     private ?string $filenameBig = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $falenameMiddle = null;
+    private ?string $filenameMiddle = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $falenameSmall = null;
+    private ?string $filenameSmall = null;
 
     public function getId(): ?int
     {
@@ -55,26 +55,26 @@ class ProductImage
         return $this;
     }
 
-    public function getFalenameMiddle(): ?string
+    public function getFilenameMiddle(): ?string
     {
-        return $this->falenameMiddle;
+        return $this->filenameMiddle;
     }
 
-    public function setFalenameMiddle(string $falenameMiddle): self
+    public function setFilenameMiddle(string $filenameMiddle): self
     {
-        $this->falenameMiddle = $falenameMiddle;
+        $this->filenameMiddle = $filenameMiddle;
 
         return $this;
     }
 
-    public function getFalenameSmall(): ?string
+    public function getFilenameSmall(): ?string
     {
-        return $this->falenameSmall;
+        return $this->filenameSmall;
     }
 
-    public function setFalenameSmall(string $falenameSmall): self
+    public function setFilenameSmall(string $filenameSmall): self
     {
-        $this->falenameSmall = $falenameSmall;
+        $this->filenameSmall = $filenameSmall;
 
         return $this;
     }

@@ -68,8 +68,8 @@ class ProductImageManager
 //        }
 
         $productImage = new ProductImage();
-        $productImage->setFalenameSmall($imageSmall);
-        $productImage->setFalenameMiddle($imageMiddle);
+        $productImage->setFilenameSmall($imageSmall);
+        $productImage->setFilenameMiddle($imageMiddle);
         $productImage->setFilenameBig($imageBig);
 
         return $productImage;

@@ -41,7 +41,7 @@ class ProductFormHandler
 //        dd($product, $form->get('newImage')->getData());
 
         $this->productManager->save($product);
-        dd($product);
+//        dd($product);
         return $product;
 
     }
