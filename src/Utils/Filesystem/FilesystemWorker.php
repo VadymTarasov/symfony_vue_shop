@@ -26,13 +26,13 @@ class FilesystemWorker
         }
     }
 
-//    /**
-//     * @param string $item
-//     */
-//    public function remove(string $item)
-//    {
-//        if ($this->filesystem->exists($item)) {
-//            $this->filesystem->remove($item);
-//        }
-//    }
+    /**
+     * @param string $item
+     */
+    public function remove(string $item)
+    {
+        if ($this->filesystem->exists($item)) {
+            $this->filesystem->remove($item);
+        }
+    }
 }
