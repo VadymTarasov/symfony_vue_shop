@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\EditProductFormType;
 use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
+use App\Utils\Manager\ProductManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,10 +51,10 @@ class ProductController extends AbstractController
     }
 
     #[Route('/admin/product/delete{id}', name: 'admin_product_delete')]
-    public function delete(): Response
+    public function delete(Product $product, ProductManager $productManager): Response
     {
-        return $this->render('admin/product/index.html.twig', [
-            'controller_name' => 'ProductController',
+        $productManager->remove($product);
+        return $this->redirectToRoute('admin_product_list', [
         ]);
     }
 }

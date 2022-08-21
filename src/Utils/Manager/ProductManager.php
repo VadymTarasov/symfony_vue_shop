@@ -72,5 +72,11 @@ class ProductManager
 //        return $product;
     }
 
+    public function remove(Product $product)
+    {
+        $product->setIsDeleted(true);
+        $this->save($product);
+    }
+
 
 }
