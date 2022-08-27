@@ -138,6 +138,11 @@ class Product
         return $this;
     }
 
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
     public function isIsDeleted(): ?bool
     {
         return $this->isDeleted;
@@ -148,6 +153,11 @@ class Product
         $this->isDeleted = $isDeleted;
 
         return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Form\EditProductFormType;
 use App\Form\Handler\ProductFormHandler;
+use App\Form\Model\EditProductModel;
 use App\Repository\ProductRepository;
 use App\Utils\Manager\ProductManager;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,11 +33,11 @@ class ProductController extends AbstractController
     {
 
 
-        if (!$product){
-            $product = new Product();
-        }
+        $editProductModel = EditProductModel::makeFromProduct($product);
+//        dd($editProductModel);
+
         $user = $this->getUser();
-        $form = $this->createForm(EditProductFormType::class, $product);
+        $form = $this->createForm(EditProductFormType::class, $editProductModel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
