@@ -40,8 +40,9 @@ class ProductFormHandler
         $product->setQuantity($editProductModel->quantity);
         $product->setDescription($editProductModel->description);
         $product->setIsPublished($editProductModel->isPublished);
+        $product->setCategory($editProductModel->category);
         $product->setIsDeleted($editProductModel->isDeleted);
-//        dd($product);
+//        dd($editProductModel, $product);
         $this->productManager->save($product);
 
         $newImageFile = $form->get('newImage')->getData();

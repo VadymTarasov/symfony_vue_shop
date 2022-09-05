@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\Model\EditProductModel;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,50 +19,59 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EditProductFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',TextType::class,[
-                'label'=>'Title',
-                'required'=>true,
-                'attr'=>[
-                  'class'=>'form-control'
+            ->add('title', TextType::class, [
+                'label' => 'Title',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control'
                 ],
-                'constraints'=>[
-                    new NotBlank([],'Should be filled')
+                'constraints' => [
+                    new NotBlank([], 'Should be filled')
                 ]
             ])
-            ->add('price', NumberType::class,[
-                'label'=>'Price',
-                'scale'=>2,
-                'html5'=>true,
-                'required'=>true,
-                'attr'=>[
-                    'class'=>'form-control',
-                    'step'=>'0.01'
+            ->add('price', NumberType::class, [
+                'label' => 'Price',
+                'required' => true,
+                'scale' => 2,
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 0,
+                    'step' => '0.01'
                 ]
             ])
             ->add('quantity', IntegerType::class, [
-                'label'=>'quantity',
-                'required'=>true,
-                'attr'=>[
-                    'class'=>'form-control'
+                'label' => 'Quantity',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
             ->add('description', TextareaType::class, [
-                'label'=>'description',
-                'required'=>true,
-                'attr'=>[
-                    'class'=>'form-control',
-                    'style'=>'overflow: hidden'
+                'label' => 'Description',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'overflow: hidden;'
                 ]
             ])
             ->add('newImage', FileType::class, [
                 'label' => 'Choose new image',
                 'required' => false,
-//                'mapped' => false,
                 'attr' => [
                     'class' => 'form-control-file'
+                ]
+            ])
+            ->add('category', EntityType::class, [
+                'label' => 'Category',
+                'required' => true,
+                'class' => Category::class,
+                'choice_label' => 'title',
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
             ->add('isPublished', CheckboxType::class, [
@@ -86,7 +97,7 @@ class EditProductFormType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => EditProductModel::class,
