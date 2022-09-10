@@ -13,11 +13,16 @@ class CategoryController extends AbstractController
     #[Route('/category/{slug}', name: 'main_category_show')]
     public function show(Category $category): Response
     {
-        if (!$category){
+        if (!$category) {
             throw new NotFoundHttpException();
         }
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+//        dd($category);
+
+        $products = $category->getProducts()->getValues();
+
+        return $this->render('main/category/show.html.twig', [
+            'category' => $category,
+            'products' => $products
         ]);
     }
 }
