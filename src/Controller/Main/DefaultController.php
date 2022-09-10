@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Main;
 
 use App\Entity\Product;
-use App\Form\EditProductFormType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
