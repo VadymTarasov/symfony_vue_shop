@@ -43,6 +43,7 @@ class Order
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->orderProducts = new ArrayCollection();
+        $this->isDeleted = false;
     }
 
     public function getId(): ?int
