@@ -5,6 +5,7 @@ namespace App\Utils\Manager;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\OrderProduct;
+use App\Entity\StaticStorage\OrderStaticStorage;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
@@ -47,7 +48,7 @@ class OrderManager extends AbstractBaseManager
 
         $order = new Order();
         $order->setOwner($user);
-        $order->setStatus(0);
+        $order->setStatus(OrderStaticStorage::ORDER_STATUS_CREATED);
         $orderTotalPrice = 0;
 
 
@@ -73,6 +74,10 @@ class OrderManager extends AbstractBaseManager
         $order->setTotalPrice($orderTotalPrice);
 //        $order->setUpdatedAt(new \DateTimeImmutable());
         $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
+        $this->cartManager->delete($cart);
+
 
         dd($order);
 

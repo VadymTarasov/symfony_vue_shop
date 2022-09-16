@@ -34,14 +34,14 @@ abstract class AbstractBaseManager
         $this->entityManager->flush();
     }
 
-//    /**
-//     * @param object $entity
-//     */
-//    public function remove(object $entity): void
-//    {
-//        $this->entityManager->remove($entity);
-//        $this->entityManager->flush();
-//    }
+    /**
+     * @param object $entity
+     */
+    public function delete(object $entity): void
+    {
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
+    }
 
     /**
      * @param string $id
