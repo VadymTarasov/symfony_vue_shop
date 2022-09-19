@@ -84,6 +84,17 @@ class OrderManager extends AbstractBaseManager
 
     }
 
+    /**
+     * @param object $entity
+     */
+    public function saveOrder(object $entity)
+    {
+        $entity->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+    }
+
 
     /**
      * @param Order $order

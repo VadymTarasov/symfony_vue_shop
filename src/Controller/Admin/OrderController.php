@@ -4,6 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Order;
 use App\Entity\StaticStorage\OrderStaticStorage;
+use App\Form\Admin\EditCategoryFormType;
+use App\Form\Admin\EditOrderFormType;
+use App\Form\Handler\OrderFormHandler;
+use App\Form\Model\EditCategoryModel;
 use App\Repository\OrderRepository;
 use App\Utils\Manager\OrderManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,18 +34,20 @@ class OrderController extends AbstractController
     }
     #[Route('/admin/order/edit{id}', name: 'admin_order_edit')]
     #[Route('/admin/order/add', name: 'admin_order_add')]
-    public function edit(Request $request, Order $order = null, ManagerRegistry $doctrine): Response
+    public function edit(Request $request, OrderFormHandler $orderFormHandler,
+                         Order $order = null, ManagerRegistry $doctrine): Response
     {
         $user = $this->getUser();
-        /*
-//
-        $editCategoryModel = EditCategoryModel::makeFromCategory($order);
 
-        $form = $this->createForm(EditCategoryFormType::class, $editCategoryModel);
+        if (!$order) {
+            $order = new Order();
+        }
+
+        $form = $this->createForm(EditOrderFormType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $order = $orderFormHandler->processEditForm($editCategoryModel);
+            $order = $orderFormHandler->processEditForm($order);
 
             $this->addFlash('success', 'Your changes were saved!');
 
@@ -51,14 +57,15 @@ class OrderController extends AbstractController
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('warning', 'Something went wrong. Please check your form!');
         }
-        */
 
         return $this->render('admin/order/edit.html.twig', [
-            'order' => $order,
             'user' => $user,
-            'form' => $form->createView()
+            'order' => $order,
+            'form' => $form->createView(),
         ]);
+
     }
+
     #[Route('/admin/order/delete{id}', name: 'admin_order_delete')]
     public function delete(Order $order, OrderManager $orderManager): Response
     {
