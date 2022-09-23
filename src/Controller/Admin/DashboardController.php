@@ -12,7 +12,9 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'admin_dashboard_show')]
     public function dashboard(): Response
     {
-        if (!in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if (!in_array("ROLE_ADMIN", $this->getUser()->getRoles())
+        and !in_array("ROLE_SUPER_ADMIN", $this->getUser()->getRoles())
+        ) {
             return $this->render('main/default/index.html.twig');
         }
 
